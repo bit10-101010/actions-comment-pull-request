@@ -27,8 +27,8 @@ jobs:
       - name: Compare commits
         id: compare
         run: |
-          AHEAD=$(git rev-list --count upstream/main..main)
-          BEHIND=$(git rev-list --count main..upstream/main)
+          AHEAD=$(git rev-list --count upstream/main..HEAD)
+          BEHIND=$(git rev-list --count HEAD..upstream/main)
 
           echo "ahead=$AHEAD" >> $GITHUB_OUTPUT
           echo "behind=$BEHIND" >> $GITHUB_OUTPUT
@@ -105,5 +105,5 @@ jobs:
           git config user.email actions@github.com
           git add README.md
           git commit -m "update upstream dashboard" || true
-          git pull --rebase origin main
-          git push
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
