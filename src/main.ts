@@ -1,6 +1,4 @@
 import fs from 'fs';
-import * as github from '@actions/github';
-import * as core from '@actions/core';
 import { GetResponseDataTypeFromEndpointMethod } from '@octokit/types';
 
 // See https://docs.github.com/en/rest/reactions#reaction-types
@@ -8,7 +6,12 @@ const REACTIONS = ['+1', '-1', 'laugh', 'confused', 'heart', 'hooray', 'rocket',
 type Reaction = (typeof REACTIONS)[number];
 
 async function run() {
+  let core: any;
+
   try {
+    const github = await import('@actions/github');
+    core = await import('@actions/core');
+
     const message: string = core.getInput('message');
     const filePath: string = core.getInput('file-path');
     const githubToken: string = core.getInput('github-token');
@@ -189,7 +192,11 @@ async function run() {
     });
   } catch (error) {
     if (error instanceof Error) {
-      core.setFailed(error.message);
+      if (core) {
+        core.setFailed(error.message);
+      } else {
+        console.error(error.message);
+      }
     }
   }
 }

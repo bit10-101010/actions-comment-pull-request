@@ -1,8 +1,11 @@
-import * as github from '@actions/github';
-import * as core from '@actions/core';
 
 async function run() {
+  let core: any;
+
   try {
+    const github = await import('@actions/github');
+    core = await import('@actions/core');
+
     const githubToken: string = core.getInput('github-token');
     const prNumber: string = core.getInput('pr-number');
     const commentTag: string = core.getInput('comment-tag');
@@ -48,7 +51,11 @@ async function run() {
     return;
   } catch (error) {
     if (error instanceof Error) {
-      core.setFailed(error.message);
+      if (core) {
+        core.setFailed(error.message);
+      } else {
+        console.error(error.message);
+      }
     }
   }
 }
