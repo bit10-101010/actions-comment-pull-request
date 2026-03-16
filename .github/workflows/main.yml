@@ -51,4 +51,5 @@ jobs:
           git config user.email actions@github.com
           git add README.md
           git commit -m "update upstream gui" || true
+          git pull --rebase origin main
           git push
