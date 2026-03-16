@@ -1,4 +1,4 @@
-# Comment Pull Request - GitHub Actions
+# Comment Pull Request - GitHub Actions.
 
 ## What is it ?
 
