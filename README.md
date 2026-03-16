@@ -195,5 +195,9 @@ It is handled by `vercel/ncc` compiler.
 $ npm run build
 ```
 <!--SYNC-START-->
-Loading...
+## 🔎 Upstream Sync Panel
+
+| Repo | Ahead | Behind |
+|------|------|--------|
+| thollander/actions-comment-pull-request | 1 | 188 |
 <!--SYNC-END-->
