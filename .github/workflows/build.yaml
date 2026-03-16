@@ -31,8 +31,8 @@ jobs:
 
       - name: Setup Git
         if: github.event_name == 'push' && github.ref_name == 'main'
-        uses: fregante/setup-git-user@v2
-
+        uses: bit10-101010/setup-git-user@v2
+      
       - name: Commit/push if there is a diff
         if: github.event_name == 'push' && github.ref_name == 'main'
         run: |
