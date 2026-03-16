@@ -195,9 +195,35 @@ It is handled by `vercel/ncc` compiler.
 $ npm run build
 ```
 <!--SYNC-START-->
-## 🔎 Upstream Sync Panel
+## 🔎 Upstream Sync Dashboard
 
-| Repo | Ahead | Behind |
-|------|------|--------|
-| thollander/actions-comment-pull-request | 1 | 188 |
+**Repository:** thollander/actions-comment-pull-request
+
+![Ahead](https://img.shields.io/badge/Ahead-19-green)
+![Behind](https://img.shields.io/badge/Behind-0-red)
+![Sync](https://img.shields.io/badge/Sync-100%25-blue)
+
+### Status
+🟢 **19 commit(s) ahead**  
+🔴 **0 commit(s) behind**
+
+### Sync Progress
+[████████████████████░] **100%**
+
+### Details
+
+| Metric | Value |
+|------|------|
+| Ahead commits | 19 |
+| Behind commits | 0 |
+| Total difference | 19 |
+
+### Controls
+
+🔄 **Auto-updates every hour**  
+⚡ **Manual refresh:** Run this workflow in the Actions tab
+
+### Last Updated
+
+Mon Mar 16 06:14:41 UTC 2026
 <!--SYNC-END-->
