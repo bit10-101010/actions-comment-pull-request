@@ -1,0 +1,54 @@
+name: Upstream GUI
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add upstream
+        run: |
+          git remote add upstream https://github.com/thollander/actions-comment-pull-request.git
+          git fetch upstream
+
+      - name: Compare commits
+        id: compare
+        run: |
+          AHEAD=$(git rev-list --count upstream/main..main)
+          BEHIND=$(git rev-list --count main..upstream/main)
+
+          echo "ahead=$AHEAD" >> $GITHUB_OUTPUT
+          echo "behind=$BEHIND" >> $GITHUB_OUTPUT
+
+      - name: Update README GUI
+        run: |
+          cat <<EOF > status.md
+          ## 🔎 Upstream Sync Panel
+
+          | Repo | Ahead | Behind |
+          |------|------|--------|
+          | thollander/actions-comment-pull-request | ${{ steps.compare.outputs.ahead }} | ${{ steps.compare.outputs.behind }} |
+          EOF
+
+      - name: Inject into README
+        run: |
+          awk '/<!--SYNC-START-->/{print;system("cat status.md");skip=1;next}/<!--SYNC-END-->/{skip=0} !skip' README.md > tmp.md
+          mv tmp.md README.md
+
+      - name: Commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add README.md
+          git commit -m "update upstream gui" || true
+          git push
