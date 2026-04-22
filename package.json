@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/bit10-101010/actions-comment-pull-request#readme",
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "^3.0.1",
     "@actions/exec": "^3.0.0",
     "@actions/github": "^9.0.0",
     "@actions/io": "^3.0.2",
